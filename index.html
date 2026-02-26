@@ -137,9 +137,8 @@ table.crm .badge{display:inline-block;padding:3px 10px;border-radius:6px;font-si
 .mf-btn.danger{background:var(--rd)}
 
 /* === PROD MANAGE === */
-.pm-card{display:flex;align-items:center;gap:14px;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:16px 18px;transition:all .15s}
+.pm-card{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;transition:all .15s}
 .pm-card:hover{border-color:var(--brown2);box-shadow:0 4px 14px rgba(139,94,60,.08)}
-.pm-card[draggable]{cursor:default}
 
 /* === CHART === */
 .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
@@ -1812,20 +1811,20 @@ function renderProdMgmt(){
   document.getElementById('prodMgmt').innerHTML=products.length===0?'<div style="text-align:center;padding:20px;color:#ccc">ยังไม่มีสินค้า</div>':products.map((p,idx)=>{
     const assigned=productAssign[p.id]||[];
     const assignLabel=assigned.length===0?'<span style="color:var(--gr);font-size:10px">ทุกคน</span>':assigned.map(e=>{const u=users.find(x=>x.email===e);return u?u.name:e}).join(', ');
-    return`<div class="pm-card" draggable="true" data-idx="${idx}" ondragstart="dragProdStart(event,${idx})" ondragover="dragProdOver(event)" ondragenter="dragProdEnter(event,this)" ondragleave="dragProdLeave(event,this)" ondrop="dragProdDrop(event,${idx})" ondragend="dragProdEnd()">
-      <div style="cursor:grab;padding:4px 6px;font-size:18px;color:#ccc;user-select:none;flex-shrink:0" title="ลากเพื่อสลับ">☰</div>
+    return`<div class="pm-card">
+      <input type="number" class="prod-order-input" value="${idx+1}" min="1" max="${products.length}" data-idx="${idx}" onchange="reorderProd(${idx},this.value)" onclick="event.stopPropagation();this.select()" style="width:46px;text-align:center;padding:8px 4px;border:2px solid var(--border);border-radius:8px;font-size:15px;font-weight:700;color:var(--brown);font-family:inherit;outline:none;flex-shrink:0;cursor:text" onfocus="this.style.borderColor='var(--brown)'" onblur="this.style.borderColor='var(--border)'">
       <div style="width:48px;height:48px;border-radius:14px;background:#f5f0eb;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">${p.icon||'📦'}</div>
       <div style="flex:1;cursor:pointer" onclick="showEditProduct('${p.id}')"><div style="font-weight:700;font-size:14px">${p.name}</div><div style="font-size:11px;color:#aaa;margin-top:2px">${p.sku?'SKU: '+p.sku+' • ':''}กลุ่ม: ${p.sheet||'-'} • ${p.short}</div><div style="font-size:10px;color:var(--bl2);margin-top:2px">👤 ${assignLabel}</div></div>
       <div style="text-align:right;cursor:pointer" onclick="showEditProduct('${p.id}')"><div style="font-weight:800;font-size:16px;color:var(--brown)">฿${p.price}</div><div style="font-size:10px;color:var(--bl2);margin-top:2px">แก้ไข →</div></div>
     </div>`}).join('');
 }
-var _dragIdx=null;
-function dragProdStart(e,idx){_dragIdx=idx;e.dataTransfer.effectAllowed='move';e.target.style.opacity='0.4'}
-function dragProdOver(e){e.preventDefault();e.dataTransfer.dropEffect='move'}
-function dragProdEnter(e,el){e.preventDefault();el.style.borderColor='var(--brown)';el.style.boxShadow='0 0 0 2px var(--brown)'}
-function dragProdLeave(e,el){el.style.borderColor='';el.style.boxShadow=''}
-function dragProdDrop(e,toIdx){e.preventDefault();if(_dragIdx===null||_dragIdx===toIdx)return;const item=products.splice(_dragIdx,1)[0];products.splice(toIdx,0,item);sv('cream_products',products);syncProducts();renderProdMgmt()}
-function dragProdEnd(){_dragIdx=null;document.querySelectorAll('.pm-card').forEach(c=>{c.style.opacity='';c.style.borderColor='';c.style.boxShadow=''})}
+function reorderProd(fromIdx,toVal){
+  const toIdx=Math.max(0,Math.min(products.length-1,parseInt(toVal)-1));
+  if(isNaN(toIdx)||fromIdx===toIdx){renderProdMgmt();return}
+  const item=products.splice(fromIdx,1)[0];
+  products.splice(toIdx,0,item);
+  sv('cream_products',products);syncProducts();renderProdMgmt();
+}
 
 function renderProdAssign(){
   const admins=users.filter(u=>u.role==='admin');
