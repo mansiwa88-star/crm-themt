@@ -1818,19 +1818,21 @@ function showAddProduct(){
   document.getElementById('modalC').innerHTML=`<div class="modal-form" onclick="if(event.target===this)closeM()"><div class="mf-box">
     <div class="mf-title">📦 เพิ่มสินค้าใหม่ <button class="mf-close" onclick="closeM()">✕</button></div>
     <input class="mf-input" id="pSku" placeholder="SKU เช่น CRM-001 (ป้องกันซ้ำ)">
-    <div style="font-size:13px;font-weight:600;color:#666;margin-bottom:6px">📁 กลุ่มสินค้า</div>
-    ${hasGroups?`<select class="mf-select" id="pBrandSel" onchange="document.getElementById('pBrandNew').style.display=this.value==='__new__'?'block':'none'">
+    <div style="font-size:13px;font-weight:600;color:#666;margin-bottom:6px">📁 กลุ่มสินค้า <span style="color:#e53935">*</span></div>
+    ${hasGroups?`<select class="mf-select" id="pBrandSel" onchange="document.getElementById('pBrandNew').style.display=this.value==='__new__'?'block':'none';if(this.value==='__new__')document.getElementById('pBrandNew').focus()">
       ${existingGroups.map(b=>`<option value="${b}">${b}</option>`).join('')}
       <option value="__new__">+ สร้างกลุ่มใหม่...</option>
     </select>
-    <input class="mf-input" id="pBrandNew" placeholder="พิมพ์ชื่อกลุ่มใหม่" style="display:none">`:`<select class="mf-select" id="pBrandSel" style="display:none"><option value="__new__" selected>+ สร้างกลุ่มใหม่...</option></select>
-    <input class="mf-input" id="pBrandNew" placeholder="พิมพ์ชื่อกลุ่มใหม่ เช่น ครีมหลงเลย" style="display:block">`}
+    <input class="mf-input" id="pBrandNew" placeholder="พิมพ์ชื่อกลุ่มใหม่" style="display:none;border-color:#e53935">`
+    :`<input class="mf-input" id="pBrandNew" placeholder="พิมพ์ชื่อกลุ่มใหม่ เช่น ครีมหลงเลย" style="display:block;border-color:#8B5E3C;background:#fdf8f3">
+    <input type="hidden" id="pBrandSel" value="__new__">`}
     <input class="mf-input" id="pName" placeholder="ชื่อสินค้า">
     <input class="mf-input" id="pShort" placeholder="ชื่อย่อ (แสดงใน dropdown)">
     <input class="mf-input" id="pPrice" placeholder="ราคา" type="number" inputmode="numeric">
     <button class="mf-btn" onclick="doAddProduct()">✅ เพิ่มสินค้า</button>
     <div class="lerr" id="pErr" style="margin-top:8px"></div>
   </div></div>`;
+  if(!hasGroups)setTimeout(()=>{const el=document.getElementById('pBrandNew');if(el)el.focus()},100);
 }
 function doAddProduct(){
   const sku=document.getElementById('pSku').value.trim();
