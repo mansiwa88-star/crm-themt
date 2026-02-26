@@ -445,9 +445,52 @@ const DEFAULT_USERS=[
   {email:"admin10@hotmail.com",pin:"1010",name:"วิมล",role:"admin"},
 ];
 const DEFAULT_PRODUCTS=[
-  {id:"cream1",name:"ครีมหลงเลย 1 กระปุก",short:"1 กระปุก",price:190,icon:"🧴",sheet:"ครีมหลงเลย",sku:"",img:""},
-  {id:"cream2",name:"ครีมหลงเลย 2 กระปุก",short:"2 กระปุก",price:359,icon:"🧴🧴",sheet:"ครีมหลงเลย",sku:"",img:""},
-  {id:"cream_trial",name:"ครีมหลงเลย ทดลอง",short:"ทดลอง",price:90,icon:"✨",sheet:"ครีมหลงเลย",sku:"",img:""},
+  // === KISO 50g เซ็ต ===
+  {id:"KS50-01",name:"KISO 2(50g)",short:"KS 2×50g",price:439,icon:"📦",sheet:"KISO 50g เซ็ต",sku:"KS50-01",img:""},
+  {id:"KS50-02",name:"KISO 1(50g) เซรั่ม1 สบู่1",short:"KS 1×50g+เซรั่ม+สบู่",price:419,icon:"📦",sheet:"KISO 50g เซ็ต",sku:"KS50-02",img:""},
+  {id:"KS50-03",name:"KISO 1(50g) เซรั่ม1 เอสเซนส์1 สบู่1",short:"KS 1×50g+เซรั่ม+เอส+สบู่",price:600,icon:"📦",sheet:"KISO 50g เซ็ต",sku:"KS50-03",img:""},
+  {id:"KS50-04",name:"KISO 5(50g) สบู่1",short:"KS 5×50g+สบู่",price:1000,icon:"📦",sheet:"KISO 50g เซ็ต",sku:"KS50-04",img:""},
+  // === KISO 10g ครีม ===
+  {id:"KS10-01",name:"KISO 2(10g)",short:"KS 2×10g",price:199,icon:"📦",sheet:"KISO 10g ครีม",sku:"KS10-01",img:""},
+  {id:"KS10-02",name:"KISO 3(10g)",short:"KS 3×10g",price:289,icon:"📦",sheet:"KISO 10g ครีม",sku:"KS10-02",img:""},
+  {id:"KS10-03",name:"KISO 4(10g)",short:"KS 4×10g",price:359,icon:"📦",sheet:"KISO 10g ครีม",sku:"KS10-03",img:""},
+  {id:"KS10-04",name:"KISO 5(10g)",short:"KS 5×10g",price:399,icon:"📦",sheet:"KISO 10g ครีม",sku:"KS10-04",img:""},
+  {id:"KS10-05",name:"KISO 6(10g)",short:"KS 6×10g",price:449,icon:"📦",sheet:"KISO 10g ครีม",sku:"KS10-05",img:""},
+  {id:"KS10-06",name:"KISO 7(10g)",short:"KS 7×10g",price:549,icon:"📦",sheet:"KISO 10g ครีม",sku:"KS10-06",img:""},
+  // === KISO 10g เซ็ต ===
+  {id:"KS10S-01",name:"KISO 2(10g) เอสเซนส์1 สบู่1",short:"KS 2×10g+เอส+สบู่",price:399,icon:"📦",sheet:"KISO 10g เซ็ต",sku:"KS10S-01",img:""},
+  {id:"KS10S-02",name:"KISO 2(10g) เซรั่ม1 สบู่1",short:"KS 2×10g+เซรั่ม+สบู่",price:399,icon:"📦",sheet:"KISO 10g เซ็ต",sku:"KS10S-02",img:""},
+  {id:"KS10S-03",name:"KISO 5(10g) สบู่1",short:"KS 5×10g+สบู่",price:429,icon:"📦",sheet:"KISO 10g เซ็ต",sku:"KS10S-03",img:""},
+  {id:"KS10S-04",name:"KISO 3(10g) เซรั่ม1 สบู่1",short:"KS 3×10g+เซรั่ม+สบู่",price:489,icon:"📦",sheet:"KISO 10g เซ็ต",sku:"KS10S-04",img:""},
+  {id:"KS10S-05",name:"KISO 3(10g) เอสเซนส์1 สบู่1",short:"KS 3×10g+เอส+สบู่",price:499,icon:"📦",sheet:"KISO 10g เซ็ต",sku:"KS10S-05",img:""},
+  {id:"KS10S-06",name:"KISO 5(10g) เอสเซนส์1 สบู่1",short:"KS 5×10g+เอส+สบู่",price:619,icon:"📦",sheet:"KISO 10g เซ็ต",sku:"KS10S-06",img:""},
+  {id:"KS10S-07",name:"KISO 7(10g) สบู่1",short:"KS 7×10g+สบู่",price:639,icon:"📦",sheet:"KISO 10g เซ็ต",sku:"KS10S-07",img:""},
+  {id:"KS10S-08",name:"KISO 10(10g) ฟรีสบู่2",short:"KS 10×10g+สบู่2",price:899,icon:"📦",sheet:"KISO 10g เซ็ต",sku:"KS10S-08",img:""},
+  {id:"KS10S-09",name:"KISO 12(10g) ฟรีสบู่3",short:"KS 12×10g+สบู่3",price:1000,icon:"📦",sheet:"KISO 10g เซ็ต",sku:"KS10S-09",img:""},
+  // === RONG 50g เซ็ต ===
+  {id:"RG50-01",name:"RONG 2(50g)",short:"RG 2×50g",price:419,icon:"📦",sheet:"RONG 50g เซ็ต",sku:"RG50-01",img:""},
+  {id:"RG50-02",name:"RONG 2(50g) สบู่1",short:"RG 2×50g+สบู่",price:429,icon:"📦",sheet:"RONG 50g เซ็ต",sku:"RG50-02",img:""},
+  {id:"RG50-03",name:"RONG 1(50g) เอสเซนส์1",short:"RG 1×50g+เอส",price:399,icon:"📦",sheet:"RONG 50g เซ็ต",sku:"RG50-03",img:""},
+  {id:"RG50-04",name:"RONG 1(50g) เซรั่ม2 สบู่1",short:"RG 1×50g+เซรั่ม2+สบู่",price:579,icon:"📦",sheet:"RONG 50g เซ็ต",sku:"RG50-04",img:""},
+  {id:"RG50-05",name:"RONG 1(50g) เซรั่ม1 เอสเซนส์1 สบู่1",short:"RG 1×50g+เซรั่ม+เอส+สบู่",price:599,icon:"📦",sheet:"RONG 50g เซ็ต",sku:"RG50-05",img:""},
+  {id:"RG50-06",name:"RONG 2(50g) เอสเซนส์1 สบู่1",short:"RG 2×50g+เอส+สบู่",price:629,icon:"📦",sheet:"RONG 50g เซ็ต",sku:"RG50-06",img:""},
+  {id:"RG50-07",name:"RONG 5(50g) สบู่2",short:"RG 5×50g+สบู่2",price:1000,icon:"📦",sheet:"RONG 50g เซ็ต",sku:"RG50-07",img:""},
+  // === RONG 10g เซ็ต ===
+  {id:"RG10-01",name:"RONG 2(10g)",short:"RG 2×10g",price:190,icon:"📦",sheet:"RONG 10g เซ็ต",sku:"RG10-01",img:""},
+  {id:"RG10-02",name:"RONG 4(10g)",short:"RG 4×10g",price:359,icon:"📦",sheet:"RONG 10g เซ็ต",sku:"RG10-02",img:""},
+  {id:"RG10-03",name:"RONG 5(10g)",short:"RG 5×10g",price:399,icon:"📦",sheet:"RONG 10g เซ็ต",sku:"RG10-03",img:""},
+  {id:"RG10-04",name:"RONG 3(10g) เอสเซนส์1",short:"RG 3×10g+เอส",price:399,icon:"📦",sheet:"RONG 10g เซ็ต",sku:"RG10-04",img:""},
+  {id:"RG10-05",name:"RONG 3(10g) เอสเซนส์1 สบู่1",short:"RG 3×10g+เอส+สบู่",price:429,icon:"📦",sheet:"RONG 10g เซ็ต",sku:"RG10-05",img:""},
+  {id:"RG10-06",name:"RONG 5(10g) สบู่2",short:"RG 5×10g+สบู่2",price:429,icon:"📦",sheet:"RONG 10g เซ็ต",sku:"RG10-06",img:""},
+  {id:"RG10-07",name:"RONG 7(10g) สบู่1",short:"RG 7×10g+สบู่",price:499,icon:"📦",sheet:"RONG 10g เซ็ต",sku:"RG10-07",img:""},
+  {id:"RG10-08",name:"RONG 2(10g) เซรั่ม2 สบู่1",short:"RG 2×10g+เซรั่ม2+สบู่",price:559,icon:"📦",sheet:"RONG 10g เซ็ต",sku:"RG10-08",img:""},
+  {id:"RG10-09",name:"RONG 2(10g) เซรั่ม1 เอสเซนส์1 สบู่1",short:"RG 2×10g+เซรั่ม+เอส+สบู่",price:579,icon:"📦",sheet:"RONG 10g เซ็ต",sku:"RG10-09",img:""},
+  // === โปรแยก ===
+  {id:"MIX-01",name:"กันแดด2 สบู่2",short:"กันแดด2+สบู่2",price:399,icon:"📦",sheet:"โปรแยก",sku:"MIX-01",img:""},
+  {id:"MIX-02",name:"เซรั่ม1 เอสเซนส์1 สบู่1",short:"เซรั่ม+เอส+สบู่",price:399,icon:"📦",sheet:"โปรแยก",sku:"MIX-02",img:""},
+  {id:"MIX-03",name:"เซรั่ม2 สบู่1",short:"เซรั่ม2+สบู่",price:399,icon:"📦",sheet:"โปรแยก",sku:"MIX-03",img:""},
+  {id:"MIX-04",name:"เอสเซนส์2 สบู่1",short:"เอสเซนส์2+สบู่",price:399,icon:"📦",sheet:"โปรแยก",sku:"MIX-04",img:""},
+  {id:"MIX-05",name:"เซรั่ม2 เอสเซนส์1 สบู่1 (คละได้)",short:"เซรั่ม2+เอส+สบู่ คละ",price:559,icon:"📦",sheet:"โปรแยก",sku:"MIX-05",img:""},
 ];
 
 let users=[],orders=[],products=[],cu=null;
@@ -2001,6 +2044,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   users=ld('cream_users',DEFAULT_USERS);
   orders=ld('cream_orders',[]);
   products=ld('cream_products',DEFAULT_PRODUCTS);
+  // Auto-reset: ถ้ายังเป็นสินค้าเก่า (cream1) ให้ใช้โปรใหม่ 2569
+  if(products.find(p=>p.id==='cream1')){products=DEFAULT_PRODUCTS;sv('cream_products',products);try{syncProducts()}catch(e){}}
   productAssign=ld('cream_prodAssign',{});
   checkSession();
   document.getElementById('loginPin').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
