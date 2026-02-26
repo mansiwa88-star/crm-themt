@@ -861,7 +861,10 @@ function getMyProducts(){if(cu.role==='boss')return products;return products.fil
 
 function initAddPage(){
   productAssign=ld('cream_prodAssign',{});
-  loadProductsFromSheets().then(()=>{renderProdCards()}).catch(()=>{renderProdCards()});
+  // ใช้สินค้าจาก local ก่อน (เก็บลำดับที่สลับไว้)
+  renderProdCards();
+  // โหลดจาก Sheets เฉพาะ assign (ไม่ทับลำดับสินค้า)
+  loadAssignFromSheets();
   const now=new Date();
   document.getElementById('oDate').textContent=fD(now);
   document.getElementById('oTime').textContent=fT(now);
@@ -1804,6 +1807,7 @@ async function sendToSheets(o){
 function syncProducts(){if(APPS_SCRIPT_URL.includes("YOUR_GOOGLE"))return;try{fetch(APPS_SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"saveProducts",products:products.map(p=>({id:p.id,name:p.name,short:p.short,price:p.price,icon:"📦",sheet:p.sheet,sku:"",img:""}))}),headers:{"Content-Type":"text/plain;charset=utf-8"},mode:"no-cors"})}catch(e){}}
 function syncAssign(){if(APPS_SCRIPT_URL.includes("YOUR_GOOGLE"))return;try{fetch(APPS_SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"saveAssign",assign:productAssign}),headers:{"Content-Type":"text/plain;charset=utf-8"},mode:"no-cors"})}catch(e){}}
 async function loadProductsFromSheets(){if(APPS_SCRIPT_URL.includes("YOUR_GOOGLE"))return;try{const res=await fetch(APPS_SCRIPT_URL);const data=await res.json();if(data.products&&Array.isArray(data.products)&&data.products.length>0){const sp=data.products.map(p=>({id:p.id||'',name:p.name||'',short:p.short||'',price:Number(p.price)||0,sheet:p.sheet||'',icon:'📦',sku:p.sku||'',img:''}));const hasNew=sp.find(p=>p.id.startsWith('KS')||p.id.startsWith('RG')||p.id.startsWith('MIX'));const localHasNew=products.find(p=>p.id.startsWith('KS')||p.id.startsWith('RG')||p.id.startsWith('MIX'));if(hasNew||!localHasNew){products=sp;sv('cream_products',products)}}if(data.assign){productAssign=data.assign;sv('cream_prodAssign',productAssign)}}catch(e){}}
+async function loadAssignFromSheets(){if(APPS_SCRIPT_URL.includes("YOUR_GOOGLE"))return;try{const res=await fetch(APPS_SCRIPT_URL);const data=await res.json();if(data.assign){productAssign=data.assign;sv('cream_prodAssign',productAssign)}}catch(e){}}
 function renderProdMgmt(){
   document.getElementById('prodMgmt').innerHTML=products.length===0?'<div style="text-align:center;padding:20px;color:#ccc">ยังไม่มีสินค้า</div>':products.map((p,idx)=>{
     const assigned=productAssign[p.id]||[];
