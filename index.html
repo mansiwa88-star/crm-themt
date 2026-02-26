@@ -1813,15 +1813,18 @@ function saveAssign(){
 }
 
 function showAddProduct(){
+  const existingGroups=[...new Set(products.map(p=>p.sheet).filter(Boolean))];
+  const hasGroups=existingGroups.length>0;
   document.getElementById('modalC').innerHTML=`<div class="modal-form" onclick="if(event.target===this)closeM()"><div class="mf-box">
     <div class="mf-title">📦 เพิ่มสินค้าใหม่ <button class="mf-close" onclick="closeM()">✕</button></div>
     <input class="mf-input" id="pSku" placeholder="SKU เช่น CRM-001 (ป้องกันซ้ำ)">
     <div style="font-size:13px;font-weight:600;color:#666;margin-bottom:6px">📁 กลุ่มสินค้า</div>
-    <select class="mf-select" id="pBrandSel" onchange="document.getElementById('pBrandNew').style.display=this.value==='__new__'?'block':'none'">
-      ${[...new Set(products.map(p=>p.sheet).filter(Boolean))].map(b=>`<option value="${b}">${b}</option>`).join('')}
+    ${hasGroups?`<select class="mf-select" id="pBrandSel" onchange="document.getElementById('pBrandNew').style.display=this.value==='__new__'?'block':'none'">
+      ${existingGroups.map(b=>`<option value="${b}">${b}</option>`).join('')}
       <option value="__new__">+ สร้างกลุ่มใหม่...</option>
     </select>
-    <input class="mf-input" id="pBrandNew" placeholder="พิมพ์ชื่อกลุ่มใหม่" style="display:none">
+    <input class="mf-input" id="pBrandNew" placeholder="พิมพ์ชื่อกลุ่มใหม่" style="display:none">`:`<select class="mf-select" id="pBrandSel" style="display:none"><option value="__new__" selected>+ สร้างกลุ่มใหม่...</option></select>
+    <input class="mf-input" id="pBrandNew" placeholder="พิมพ์ชื่อกลุ่มใหม่ เช่น ครีมหลงเลย" style="display:block">`}
     <input class="mf-input" id="pName" placeholder="ชื่อสินค้า">
     <input class="mf-input" id="pShort" placeholder="ชื่อย่อ (แสดงใน dropdown)">
     <input class="mf-input" id="pPrice" placeholder="ราคา" type="number" inputmode="numeric">
